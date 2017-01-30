@@ -32,8 +32,8 @@ def get_cassandra_goodness(product='cassandra_cluster', additional_filter=None):
  
     product_results = []
  
-    with signalfx.SignalFx().rest(token=SFX_TOKEN) as sfx:
-        sfx_results = sfx.search_dimensions(query=query)
+    with signalfx.SignalFx().rest(token=SFX_TOKEN, timeout=60) as sfx:
+        sfx_results = sfx.search_dimensions(query=query, limit=1000)
         if not sfx_results:
             return None
  
