@@ -67,7 +67,7 @@ def get_cassandra_goodness(product='cassandra_cluster', additional_filter=None):
 def main():
     main_results = get_cassandra_goodness(
         product='cassandra_cluster',
-        additional_filter='ecosystem:prod'
+        additional_filter='ecosystem:prod AND _exists_:aws_state AND NOT aws_state:"{Code: 48,Name: terminated}"',
     )
  
     print(pretty_json(main_results))
